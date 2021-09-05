@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { Component } from "react";
+import Mainvideo from "./assets/earth-video.mp4";
 import GetDate from "./components/GetDate";
 import Picture from "./components/Picture";
+import Header from "./components/Header";
+import './App.scss'
 
 class App extends Component {
   state = {
@@ -24,9 +27,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>NASA's Astronomy Picture of the Day</h1>
+      <div className="app">
+        <Header/>
         <GetDate updateDate={this.updateDate} />
+        <video className="app__video" src={Mainvideo} autoPlay muted loop/>
         <Picture photo={this.state.photo} />
       </div>
     );

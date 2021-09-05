@@ -1,12 +1,13 @@
 import React from "react";
+import './getdate.scss'
 
 
 
 const GetDate = props => (
-    <form onSubmit={props.updateDate}>
-      Enter a date (YYYY-MM-DD) : 
+    <form className="form" onSubmit={props.updateDate}>
+      <label className="form__label">Enter a date (YYYY-MM-DD) :</label> 
       <input />
-      <input type="submit" />
+      <button className="form__button" type="submit" >SUBMIT</button>
     </form>
   );
   
