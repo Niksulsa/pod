@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import React, { Component } from "react";
+import GetDate from "./components/GetDate";
+import Picture from "./components/Picture";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    date: "",
+    photo: ""
+  };
+
+  updateDate = e => {
+    e.preventDefault();
+    let dateFromInput = e.target[0].value;
+    this.setState({ date: dateFromInput });
+    this.getPicture(dateFromInput);
+  };
+
+  getPicture = date => {
+    fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=aA53jfDx54NAdobPRkGVM0aYu7uex2u6KhWI3CBV`)
+      .then(response => response.json())
+      .then(photoData => this.setState({ photo: photoData }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>NASA's Astronomy Picture of the Day</h1>
+        <GetDate updateDate={this.updateDate} />
+        <Picture photo={this.state.photo} />
+      </div>
+    );
+  }
 }
 
 export default App;
